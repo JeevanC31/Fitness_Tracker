@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/JeevanC31/Fitness_Tracker.git'
+    repoURL: 'https://github.com/charanghanta12/Fitness_Tracker.git'
     targetRevision: develop
     path: Fitness_Chart
     helm:
