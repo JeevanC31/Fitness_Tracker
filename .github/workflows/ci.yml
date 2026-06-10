@@ -90,14 +90,41 @@ jobs:
         shell: bash
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
-      - name: Build and Push Docker Image to ECR
+      - name: Build and Push Docker Image to ECR (Develop Branch)
+        if: env.BRANCH == 'develop'
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ steps.login-ecr.outputs.registry }}/fitness-tracker-app:${{ env.BRANCH }}
+            ${{ steps.login-ecr.outputs.registry }}/fitness-tracker-app:develop
             ${{ steps.login-ecr.outputs.registry }}/fitness-tracker-app:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Promote Docker Image (Staging Branch)
+        if: env.BRANCH == 'staging'
+        run: |
+          python scripts/promote_image.py \
+            --source-repo ${{ steps.login-ecr.outputs.registry }}/fitness-tracker-app \
+            --target-repo ${{ steps.login-ecr.outputs.registry }}/fitness-tracker-app \
+            --tag develop \
+            --target-tag staging
+          
+          # Also update the latest tag in ECR for the staging deployment
+          docker tag ${{ steps.login-ecr.outputs.registry }}/fitness-tracker-app:staging ${{ steps.login-ecr.outputs.registry }}/fitness-tracker-app:latest
+          docker push ${{ steps.login-ecr.outputs.registry }}/fitness-tracker-app:latest
+
+      - name: Promote Docker Image (Master/Production Branch)
+        if: env.BRANCH == 'master'
+        run: |
+          python scripts/promote_image.py \
+            --source-repo ${{ steps.login-ecr.outputs.registry }}/fitness-tracker-app \
+            --target-repo ${{ steps.login-ecr.outputs.registry }}/fitness-tracker-app \
+            --tag staging \
+            --target-tag master
+          
+          # Also update the latest tag in ECR for the production deployment
+          docker tag ${{ steps.login-ecr.outputs.registry }}/fitness-tracker-app:master ${{ steps.login-ecr.outputs.registry }}/fitness-tracker-app:latest
+          docker push ${{ steps.login-ecr.outputs.registry }}/fitness-tracker-app:latest

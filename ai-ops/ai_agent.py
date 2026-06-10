@@ -118,7 +118,7 @@ def main():
     content = ""
     if args.log_file:
         if os.path.exists(args.log_file):
-            with open(args.log_file, "r") as f:
+            with open(args.log_file, "r", encoding="utf-8", errors="ignore") as f:
                 content = f.read()
         else:
             print(f"Error: log file {args.log_file} does not exist.")
