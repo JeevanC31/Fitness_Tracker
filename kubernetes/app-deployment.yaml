@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: fitness-tracker-app
-          image: pulkit197/fitness_tracker-fitness-app:latest
+          image: 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:latest
           ports:
             - containerPort: 5000
           resources:
