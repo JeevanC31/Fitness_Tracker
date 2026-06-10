@@ -3,17 +3,14 @@ kind: ClusterConfig
 
 metadata:
   name: fitness-tracker-cluster
-  region: ap-south-2
+  region: us-west-1
 
 managedNodeGroups:
-  - name: fitness-tracker-workers
-    instanceType: c7i-flex.large
+  - name: workers
+    instanceType: t3.small
     desiredCapacity: 3
     minSize: 3
-    maxSize: 5
-    volumeSize: 30
-    volumeType: gp3
-    labels: { role: worker }
-    tags:
-      Environment: Production
-      Project: Fitness-Tracker
+    maxSize: 3
+    volumeSize: 20
+    labels:
+      role: worker

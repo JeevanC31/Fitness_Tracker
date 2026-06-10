@@ -1,0 +1,120 @@
+[2026-06-10 18:29:05] [INFO] Starting promotion flow: 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:production -> 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:release-v1
+[2026-06-10 18:29:05] [INFO] Pulling source image: 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:production
+[2026-06-10 18:29:05] [INFO] Running command: docker pull 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:production
+[2026-06-10 18:29:05] [ERROR] Command failed with exit code 1
+[2026-06-10 18:29:05] [ERROR] Stderr:
+Error response from daemon: failed to resolve reference "651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:production": pull access denied, repository does not exist or may require authorization: authorization failed: no basic auth credentials
+[2026-06-10 18:29:05] [ERROR] Failed to pull source image.
+[2026-06-10 18:32:01] [INFO] Starting promotion flow: 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:latest -> 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:release-v1
+[2026-06-10 18:32:01] [INFO] Pulling source image: 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:latest
+[2026-06-10 18:32:01] [INFO] Running command: docker pull 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:latest
+[2026-06-10 18:32:04] [DEBUG] Command Output:
+latest: Pulling from fitness-tracker-app
+f18232174bc9: Pulling fs layer
+970d45bf50e0: Pulling fs layer
+f054cc578eae: Pulling fs layer
+216e12003a20: Pulling fs layer
+dd71dde834b5: Pulling fs layer
+f54ef244177d: Pulling fs layer
+1e5a4c89cee5: Pulling fs layer
+25ff2da83641: Pulling fs layer
+970d45bf50e0: Download complete
+25ff2da83641: Download complete
+24524b033e26: Download complete
+f18232174bc9: Download complete
+1e5a4c89cee5: Download complete
+f054cc578eae: Download complete
+f54ef244177d: Download complete
+f18232174bc9: Pull complete
+216e12003a20: Download complete
+dd71dde834b5: Download complete
+1e5a4c89cee5: Pull complete
+dd71dde834b5: Pull complete
+970d45bf50e0: Pull complete
+25ff2da83641: Pull complete
+f054cc578eae: Pull complete
+216e12003a20: Pull complete
+f54ef244177d: Pull complete
+Digest: sha256:98959a17a01c1f4d70ddaa00dc7a5e1e84dbaf5c488bf5f0d4c8c8ab2812edaa
+Status: Downloaded newer image for 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:latest
+651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:latest
+[2026-06-10 18:32:04] [INFO] Re-tagging image to: 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:release-v1
+[2026-06-10 18:32:04] [INFO] Running command: docker tag 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:latest 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:release-v1
+[2026-06-10 18:32:04] [INFO] Pushing promoted image: 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:release-v1
+[2026-06-10 18:32:04] [INFO] Running command: docker push 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:release-v1
+[2026-06-10 18:32:04] [DEBUG] Command Output:
+The push refers to repository [651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app]
+216e12003a20: Layer already exists
+dd71dde834b5: Layer already exists
+25ff2da83641: Layer already exists
+970d45bf50e0: Layer already exists
+f054cc578eae: Layer already exists
+24524b033e26: Already exists
+f54ef244177d: Layer already exists
+1e5a4c89cee5: Layer already exists
+f18232174bc9: Layer already exists
+release-v1: digest: sha256:98959a17a01c1f4d70ddaa00dc7a5e1e84dbaf5c488bf5f0d4c8c8ab2812edaa size: 856
+[2026-06-10 18:32:04] [INFO] Validating promotion...
+[2026-06-10 18:32:04] [INFO] Running command: docker image inspect 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:release-v1
+[2026-06-10 18:32:04] [DEBUG] Command Output:
+[
+    {
+        "Id": "sha256:98959a17a01c1f4d70ddaa00dc7a5e1e84dbaf5c488bf5f0d4c8c8ab2812edaa",
+        "RepoTags": [
+            "651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:latest",
+            "651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:release-v1"
+        ],
+        "RepoDigests": [
+            "651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app@sha256:98959a17a01c1f4d70ddaa00dc7a5e1e84dbaf5c488bf5f0d4c8c8ab2812edaa"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-06-10T18:02:47.677616895Z",
+        "Config": {
+            "ExposedPorts": {
+                "5000/tcp": {}
+            },
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "NODE_VERSION=18.20.8",
+                "YARN_VERSION=1.22.22",
+                "NODE_ENV=production",
+                "PORT=5000"
+            ],
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "Cmd": [
+                "npm",
+                "start"
+            ],
+            "WorkingDir": "/app",
+            "ArgsEscaped": true
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 92767095,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:08000c18d16dadf9553d747a58cf44023423a9ab010aab96cf263d2216b8b350",
+                "sha256:0b1f26057bd0491a50f56fd7f2983bd3ad478511f12fff2b361a97c50cb5828b",
+                "sha256:f3b40b0cdb1caad1db11b8589c814f85b3e69f3ed33f64a686e465e74a47c9f0",
+                "sha256:82140d9a70a706b719632fec8e4d083419fc62159f94afec80dcabc52e0ed0d2",
+                "sha256:3ed45ab92bae870cbc52ab26f692fcdbb7f34674362ac7543d5b8212a9a62466",
+                "sha256:6543a4a8dd308464369923611e87a16548d6adf71479bb3475fe9022e2af5168",
+                "sha256:1583a3b70640b04035c32c479332d44d5ff139c78ec289959d402dc21b45f6a2",
+                "sha256:6f2884773bb6fa5c95ca405a5ddf9aba9a455bc26ee5d3cb8785d32ab04dde1b"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-06-10T18:32:04.16948223Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:98959a17a01c1f4d70ddaa00dc7a5e1e84dbaf5c488bf5f0d4c8c8ab2812edaa",
+            "size": 856
+        }
+    }
+]
+[2026-06-10 18:32:04] [INFO] Validation check passed successfully.
+[2026-06-10 18:32:04] [SUCCESS] Promotion completed successfully for 651770527578.dkr.ecr.us-west-1.amazonaws.com/fitness-tracker-app:release-v1!
