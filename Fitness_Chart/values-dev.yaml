@@ -4,7 +4,7 @@ global:
 app:
   replicas: 1
   image:
-    tag: latest
+    tag: develop
   service:
     type: ClusterIP # NodePort/ClusterIP is fine for dev
   resources:

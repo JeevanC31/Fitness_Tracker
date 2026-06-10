@@ -4,7 +4,7 @@ global:
 app:
   replicas: 3 # Scaled for production load
   image:
-    tag: latest
+    tag: master
   service:
     type: LoadBalancer
   resources:
